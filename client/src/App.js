@@ -3,6 +3,7 @@ import InputUrl from "./components/InputUrl";
 
 function App() {
     const getLongUrl = async () => {
+        console.log("get long url is running");
         let shortUrl = window.location.pathname;
         shortUrl = shortUrl.substring(1, shortUrl.length);
         console.log("short url", shortUrl);
@@ -16,10 +17,12 @@ function App() {
             console.log("hi hi", foundUrl);
 
             if (foundUrl != 404) {
-                window.location = foundUrl;
+                window.location.href = foundUrl;
+                // window.location.reload()
             } else {
                 window.location = "/";
             }
+            return false;
         } catch (error) {
             console.log(error.message);
         }
@@ -28,6 +31,7 @@ function App() {
     useEffect(() => {
         getLongUrl();
     }, []);
+
     return (
         <Fragment>
             <div className="container">

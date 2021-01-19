@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 const InputToDo = () => {
     const [longUrl, setLongUrl] = useState("");
     const [displayShortUrl, setDisplayShortUrl] = useState("");
+    const [copyStatus, setCopyStatus] = useState(false);
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -17,7 +18,6 @@ const InputToDo = () => {
 
             const { shorturl } = await response.json();
             setDisplayShortUrl(shorturl);
-            // window.location = "/";
         } catch (error) {
             console.log(error.message);
         }
@@ -33,11 +33,31 @@ const InputToDo = () => {
                     value={longUrl}
                     onChange={(e) => setLongUrl(e.target.value)}
                 />
-                <button className="btn btn-success">Add</button>
+                <button className="btn btn-primary">Shorty</button>
             </form>
-            <p>{displayShortUrl}</p>
+            <div className="d-flex mt-5">
+                {displayShortUrl ? <p>{`localhost:3000/${displayShortUrl}`}</p> : " "}{" "}
+                {displayShortUrl ? (
+                    <button
+                        className="btn btn-outline-primary"
+                        onClick={() => {
+                            navigator.clipboard.writeText(`localhost:3000/${displayShortUrl}`);
+                            setCopyStatus(true);
+                        }}
+                    >
+                        {copyStatus == false ? "Copy" : "Copied!"}
+                    </button>
+                ) : (
+                    " "
+                )}
+            </div>
         </Fragment>
     );
 };
 
 export default InputToDo;
+
+/*onClick={() => {
+                            window.location = `localhost:3000/${displayShortUrl}`;
+                            return true;
+                        }} */

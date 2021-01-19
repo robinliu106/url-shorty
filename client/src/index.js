@@ -5,7 +5,9 @@ import App from "./App";
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <Switch>
+            <Route path="/*" component={App} />
+        </Switch>
     </BrowserRouter>,
     document.getElementById("root")
 );
