@@ -35,11 +35,11 @@ const InputToDo = () => {
                 />
                 <button className="btn btn-primary">Shorty</button>
             </form>
-            <div className="d-flex mt-5">
+            <div className="text-center d-flex justify-content-center mt-5">
                 {displayShortUrl ? <p>{`localhost:3000/${displayShortUrl}`}</p> : " "}{" "}
                 {displayShortUrl ? (
                     <button
-                        className="btn btn-outline-primary"
+                        className="btn btn-outline-primary ms-3"
                         onClick={() => {
                             navigator.clipboard.writeText(`localhost:3000/${displayShortUrl}`);
                             setCopyStatus(true);
